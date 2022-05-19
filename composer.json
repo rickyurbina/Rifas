@@ -1,0 +1,8 @@
+{
+    "name": "u3digital/rifas",
+    "type": "project",
+    "license": "ISC",
+    "require": {
+        "mercadopago/dx-php": "^2.2"
+    }
+}
