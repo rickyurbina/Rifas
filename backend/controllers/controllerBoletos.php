@@ -11,7 +11,8 @@
           $vendidos = BoletosModel::mdlObtenerBoletosVendidos();
           $sorteoActual = BoletosModel::mdlObtenerSorteoActual();
           $ingresos = $vendidos[0] * $sorteoActual["costoBoleto"];
-          $porcentaje = ($vendidos[0])*(100/$sorteoActual["noBoletos"]); 
+          $porcentaje = round(($vendidos[0])*(100/$sorteoActual["noBoletos"]), 2); 
+          
           echo'
           <div class="row">
             <div class="col-xl-3 box-col-3 col-lg-12 col-md-3">
@@ -240,21 +241,23 @@
 
         public function ctrActualizarBoleto() {
           if (isset($_POST["cajaNoBoleto2"])) {
+            $fechaApartado = date('Y-m-d', strtotime($_POST['cajafechaApartado']));
+            $fechaPagado = date('Y-m-d', strtotime($_POST['cajafechaPagado']));
+            $horaApartado = date('H:i', strtotime($_POST['cajahoraApartado']));
+            $horaPagado = date('H:i', strtotime($_POST['cajahoraPagado']));
+            
             $datosController = array(
-              "idSorteo" => BoletosModel::mdlObtenerSorteoActual()["idSorteo"],
-              "noBoleto" => $_POST["cajaNoBoleto2"],
               "nombre" => $_POST["cajaNombreCliente"],
               "telefono" => $_POST["cajaTelefonoCliente"],
-              "estado" => $_POST["cajaEstadoUsuario"],
               "email" => $_POST["cajaEmailUsuario"],
+              "noBoleto" => $_POST["cajaNoBoleto2"],
+              "estado" => $_POST["cajaEstadoUsuario"],
               "status" => $_POST["cajaStatusVenta"],
-              "fechaApartado" => $_POST["cajafechaApartado"],
-              "fechaPagado" => $_POST["cajafechaPagado"],
-              "horaApartado" => $_POST["cajahoraApartado"],
-              "horaPagado" => $_POST["cajahoraPagado"]
+              "idSorteo" => BoletosModel::mdlObtenerSorteoActual()["idSorteo"]
             );
-            $respuesta = BoletosModel::mdlActualizarBoleto($datosController);
-
+            $respuesta = BoletosModel::mdlActualizarBoleto($datosController, $fechaApartado, $fechaPagado, $horaApartado, $horaPagado);
+            // Redireccion del Modal si tiene success
+            //window.location.href = 'inicio.php?action=lstSorteos';
             if ($respuesta === "success") {
               echo "
               <script>
@@ -264,16 +267,15 @@
                   confirmButtonText: 'Aceptar',
                   confirmButtonColor: '#F73164'
                 }).then((value) => {
-                  window.location.href = 'inicio.php?action=lstSorteos';
+                  // window.location.href = 'inicio.php?action=lstSorteos';
                 });
               </script>
               ";
             } else {
-              var_dump($respuesta);
               echo "
                 <script>
                   Swal.fire({
-                    title: 'Error',
+                    title: 'Error al actualizar el boleto',
                     icon: 'error',
                     confirmButtonText: 'Aceptar',
                     confirmButtonColor: '#F73164'

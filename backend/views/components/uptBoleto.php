@@ -3,11 +3,12 @@
     <div class="col-md-6 col-lg-6 col-12">
       <div class="card">
         <div class="card-header">
-          <h5>No. Boleto</h5>
+          <h5>Editar Boleto</h5>
         </div>
         <div class="card-body">
           <div class="row">
             <div class="col">
+            <label for="col-form-label pt-0" for="cajaNombreCliente">Numero de Boleto:</label>
               <input type="text" class="form-control" id="cajaBoleto">
             </div>
           </div>
@@ -125,7 +126,7 @@
               <div class="col-md-3 col-lg-3 col-12">
                 <div class="form-group">
                   <label class="col-form-label pt-0" for="cajafechaPagado">Fecha Pagado: *</label>
-                  <input type="date" name="cajafechaPagado" minlength="10" maxlength="10" id="cajafechaPagado" class="form-control" >
+                  <input type="date" name="cajafechaPagado" id="cajafechaPagado" class="form-control" >
                 </div>
               </div>
               <div class="col-md-3 col-lg-3 col-12">

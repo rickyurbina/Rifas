@@ -53,29 +53,23 @@
             }
         }
 
-        public static function mdlActualizarBoleto($datosModel) {
-            $statement = Conexion::conectar() -> prepare(
-                "UPDATE `boletos` SET `nombre` = :nombre, `telefono` = :telefono, `email` = :email, `estado` = :estado, `status` = :s,
-                WHERE `noBoleto` = :noBoleto AND `idSorteo` = :idSorteo;");
+        public static function mdlActualizarBoleto($datosModel, $fechaApartado, $fechaPagado, $horaApartado, $horaPagado) {
+
+            $statement = Conexion::conectar() -> prepare("UPDATE `boletos` SET `nombre`= :nombre, `telefono` = :telefono, `email` = :email, `estado` = :estado, `status` = :s, `fecha`= '$fechaApartado', `fechaPago`= '$fechaPagado', `horaApartado` = '$horaApartado', `horaPagado` = '$horaPagado'  WHERE `noBoleto` = :noBoleto AND `idSorteo` = :idSorteo;");
           
             $statement -> bindParam(":nombre", $datosModel["nombre"], PDO::PARAM_STR);
             $statement -> bindParam(":telefono", $datosModel["telefono"], PDO::PARAM_STR);
             $statement -> bindParam(":email", $datosModel["email"], PDO::PARAM_STR);
             $statement -> bindParam(":estado", $datosModel["estado"], PDO::PARAM_STR);
             $statement -> bindParam(":s", $datosModel["status"], PDO::PARAM_STR);
-            // $statement -> bindParam(":fechaApartado", $datosModel["fechaApartado"], PDO::PARAM_STR);
-            // $statement -> bindParam(":fechaPagado", $datosModel["fechaPagado"], PDO::PARAM_STR);
-            // $statement -> bindParam(":horaApartado", $datosModel["horaApartado"], PDO::PARAM_STR);
-            // $statement -> bindParam(":horaPagado", $datosModel["horaPagado"], PDO::PARAM_STR);
             $statement -> bindParam(":noBoleto", $datosModel["noBoleto"], PDO::PARAM_INT);
             $statement -> bindParam(":idSorteo", $datosModel["idSorteo"], PDO::PARAM_INT);
-                        
+            
             if ($statement -> execute()) {
-                return "success";
-                }
-                else{
-                    return "error";
-                }
+              return "success";
+            } else {
+              return "error";
+            }
         }
 
         public static function mdlObtenerSorteoActual(){
