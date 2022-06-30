@@ -7,7 +7,8 @@ class EnlacesModel {
   public static function mdlEnlaces($enlaces) {
     $module = "";
     $listaEnlaces = [
-      "agregarSorteo", 
+      "agregarSorteo",
+      "ventaBoleto",
       "lstSorteos", 
       "agregarUsuario", 
       "lstUsuarios", 

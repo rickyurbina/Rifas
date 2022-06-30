@@ -21,7 +21,7 @@
           $statement -> execute();
           return $statement -> fetch();
         }
-
+        
         public static function mdlBuscaBoletos($tabla,$id){
             $statement = Conexion::conectar() -> prepare("SELECT * FROM `boletos` WHERE idSorteo = :idSorteo ORDER BY noBoleto ASC ");
 
@@ -112,7 +112,7 @@
 
             $statement -> bindParam(":id",$idBoleto,PDO::PARAM_INT);
             date_default_timezone_set("America/Chihuahua");
-            $statement -> bindParam(":horaPagado", date("h:i:s"), PDO::PARAM_STR);
+            $statement -> bindParam(":horaPagado", date("H:i:s"), PDO::PARAM_STR);
 
             if($statement -> execute()){
                 return "success";

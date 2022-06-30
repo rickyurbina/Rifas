@@ -12,7 +12,7 @@
           <li class="dropdown"><a class="nav-link menu-title link-nav" href=""><span></span></a></li>
           <li><a class="nav-link" href="inicio.php?action=lstBoletosVendidos&idSorteo=<?php echo $idSorteo; ?>"><i class="fas fa-check mr-2"></i><span>Boletos Vendidos</span></a></li>
           <li><a class="nav-link" href="inicio.php?action=lstBoletosPendientes&idSorteo=<?php echo $idSorteo; ?>"><i class="fas fa-dollar-sign mr-2"></i><span>Boletos Apartados</span></a></li>
-          <li><a class="nav-link" href="inicio.php?action=agregarBoleto"><i class="fas fa-ticket-alt mr-2"></i><span>Vender boletos</span></a></li>
+          <li><a class="nav-link" href="inicio.php?action=ventaBoleto"><i class="fas fa-ticket-alt mr-2"></i><span>Vender boletos</span></a></li>
           <li><a class="nav-link" href="inicio.php?action=uptBoleto"><i class="fa-solid fa-pencil mr-2"></i><span>Editar boleto</span></a></li>
           
           <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="calendar"></i><span>Sorteos</span></a>

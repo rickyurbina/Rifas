@@ -84,24 +84,23 @@
 
                 if ($_POST["cajaStatusVenta"] == 'P'){
                   $fechaPago = date("Y-m-d");
-                  $horaPagado = date("h:i:s");
+                  $horaPagado = date("H:i:s");
                 }
                 else{
-                  $fechaPago = '1000-01-01';
+                  $fechaPago = '0000-01-01';
                   $horaPagado = '00:00:00';
-
                 }
                 $datosController = array(
                     "nombre" => $_POST["cajaNombreCliente"],
                     "telefono" => $_POST["cajaTelefonoCliente"],
                     "email" => $_POST["cajaEmailUsuario"],
-                    "noBoleto" => $_POST["cajaNoBoleto"],
+                    "noBoleto" => $_POST["cajaNoBoleto2"],
                     "status" => $_POST["cajaStatusVenta"],
                     "estado" => $_POST["cajaEstadoUsuario"],
                     "idSorteo" => $idSorteo[0],
                     "fecha" => date("Y-m-d"),
                     "fechaPago"=> $fechaPago,
-                    "horaApartado" => date("h:i:s"),
+                    "horaApartado" => date("H:i:s"),
                     "horaPagado" => $horaPagado
                 );
                 $respuesta = BoletosModel::mdlAgregarBoleto($datosController);
@@ -115,7 +114,7 @@
                         confirmButtonText: 'Aceptar',
                         confirmButtonColor: '#F73164'
                       }).then((value) => {
-                        window.location.href = 'inicio.php?action=lstSorteos';
+                        //window.location.href = 'inicio.php?action=lstSorteos';
                       });
                     </script>
                     ";
@@ -242,9 +241,12 @@
         public function ctrActualizarBoleto() {
           if (isset($_POST["cajaNoBoleto2"])) {
             $fechaApartado = date('Y-m-d', strtotime($_POST['cajafechaApartado']));
-            $fechaPagado = date('Y-m-d', strtotime($_POST['cajafechaPagado']));
             $horaApartado = date('H:i', strtotime($_POST['cajahoraApartado']));
-            $horaPagado = date('H:i', strtotime($_POST['cajahoraPagado']));
+            
+            
+              $fechaPagado = date('Y-m-d', strtotime($_POST['cajafechaPagado']));
+              $horaPagado = date('H:i', strtotime($_POST['cajahoraPagado']));
+            
             
             $datosController = array(
               "nombre" => $_POST["cajaNombreCliente"],

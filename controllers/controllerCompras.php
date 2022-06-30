@@ -45,7 +45,7 @@ class ComprasController {
         "estado" => $_POST["cajaEstado"],
         "fecha" => date("Y-m-d"),
         "fechaPago" => date("Y-m-d"),
-        "horaApartado" => date('h:i:s')
+        "horaApartado" => date('H:i:s')
       );
 
     //http://localhost/rifas/manejadorpago.php?confirmar=bV4=&collection_id=1236825908&collection_status=approved&payment_id=1236825908&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=2681335737&preference_id=494895024-10af83c0-cec0-4a20-aaaa-ae3d4038894c&site_id=MLM&processing_mode=aggregator&merchant_account_id=null

@@ -3,7 +3,7 @@
     <div class="col-md-6 col-lg-6 col-12">
       <div class="card">
         <div class="card-header">
-          <h5>Editar Boleto</h5>
+          <h5>Venta de Boletos</h5>
         </div>
         <div class="card-body">
           <div class="row">
@@ -26,7 +26,7 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <h5>Editar boleto</h5>
+          <h5>Venta de Boletos</h5>
         </div>
         <div class="card-body">
           <form method="POST" id="editarBoletoForm" class="theme-form">
@@ -110,7 +110,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-md-3 col-lg-3 col-12">
                 <div class="form-group">
                   <label for="col-form-label pt-0" for="cajafechaApartado">Fecha Apartado:</label>
@@ -135,19 +135,21 @@
                   <input type="text" name="cajahoraPagado" id="cajahoraPagado" class="form-control">
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="row justify-content-center">
               <div class="col-md-3 col-lg-3 col-6">
                 <button class="btn btn-warning btn-block" type="button" onclick="window.location.reload()">Cancelar</button>
               </div>
               <div class="col-md-3 col-lg-3 col-6">
-                <button class="btn btn-secondary btn-block" type="submit">Guardar</button>
+                <button class="btn btn-secondary btn-block" type="submit" id="btnGuardar">Guardar</button>
               </div>
+
             </div>
           </form>
           <?php
           $controllerBoletos = new BoletosController();
-          $controllerBoletos -> ctrActualizarBoleto();
+          //$controllerBoletos -> ctrActualizarBoleto();
+          $controllerBoletos -> ctrAgregaBoleto();
           ?>
         </div>
       </div>
@@ -157,6 +159,8 @@
 
 <script>
   const cajaBoleto = document.getElementById('cajaBoleto');
+  const btnGuardar = document.getElementById('btnGuardar');
+  //btnGuardar.disabled=true;
 
   function consultarBoleto() {
     if (cajaBoleto.value) {
@@ -172,29 +176,29 @@
           success: (response) => {
             const boleto = JSON.parse(response);
             if (boleto) {
-              console.log(boleto);
-              calcularBoletos(cajaBoleto.value);
-              document.getElementById('container-consulta').style.display = 'none';
-              document.getElementById('container-editar').style.display = 'flex';
-
-              document.getElementById('cajaNombreCliente').value = boleto.nombre;
-              document.getElementById('cajaTelefonoCliente').value = boleto.telefono;
-              document.getElementById('cajaEmailUsuario').value = boleto.email;
-              document.getElementById('cajaNoBoleto').value = cajaBoleto.value;
-              document.getElementById('cajaNoBoleto2').value = cajaBoleto.value;
-              document.getElementById('cajaEstadoUsuario').value = boleto.estado;
-              document.getElementById('cajaStatusVenta').value = boleto.status;
-              document.getElementById('cajafechaApartado').value = boleto.fecha;
-              document.getElementById('cajafechaPagado').value = boleto.fechaPago;
-              document.getElementById('cajahoraApartado').value = boleto.horaApartado;
-              document.getElementById('cajahoraPagado').value = boleto.horaPagado;
-                            
-            } else {
               Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'El Boleto no se ha vendido aún'
+                text: 'El Boleto ya está vendido'
               })
+                            
+            } else {
+              console.log(boleto);
+              calcularBoletos(cajaBoleto.value);
+               document.getElementById('container-consulta').style.display = 'none';
+               document.getElementById('container-editar').style.display = 'flex';
+
+              // document.getElementById('cajaNombreCliente').value = boleto.nombre;
+              // document.getElementById('cajaTelefonoCliente').value = boleto.telefono;
+              // document.getElementById('cajaEmailUsuario').value = boleto.email;
+               document.getElementById('cajaNoBoleto').value = cajaBoleto.value;
+               document.getElementById('cajaNoBoleto2').value = cajaBoleto.value;
+              // document.getElementById('cajaEstadoUsuario').value = boleto.estado;
+              // document.getElementById('cajaStatusVenta').value = boleto.status;
+              // document.getElementById('cajafechaApartado').value = boleto.fecha;
+              // document.getElementById('cajafechaPagado').value = boleto.fechaPago;
+              // document.getElementById('cajahoraApartado').value = boleto.horaApartado;
+              // document.getElementById('cajahoraPagado').value = boleto.horaPagado;
             }
           },
           error: (error) => {
@@ -208,13 +212,13 @@
       } else {
         Swal.fire({
           icon: 'error',
-          text: 'Inserte un número de boleto válido'
+          text: 'Escriba solamente numeros'
         });
       }
     } else {
       Swal.fire({
         icon: 'error',
-        text: 'Inserte un número de boleto válido'
+        text: 'Escriba el numero de boleto que desea buscar'
       });
     }
   }
@@ -228,6 +232,11 @@
       spanBoletos.innerHTML = `Boletos: ${25000 - (numero - 5001)}, ${numero + 25000}, ${50000 - (numero - 5001)}`;
     } else if (numero >= 10001 && numero <= 15000) {
       spanBoletos.innerHTML = `Boletos: ${30000 - (numero - 10001)}, ${numero + 30000}, ${60000 - (numero - 10001)}`;
+    }
+    else{
+      btnGuardar.disabled=true;
+      spanBoletos.className += "alert alert-danger";
+      spanBoletos.innerHTML = `Numero invalido para este sorteo`;
     }
   }
 </script>
