@@ -292,7 +292,7 @@
           $respuesta = BoletosModel::mdlBuscaBoletos("boletos",$idSorteo);
           $j = 0;
           $boletos = "";
-          for ($i = 0; $i < 2500; $i++) {
+          for ($i = 0; $i < 15000; $i++) {
             include_once "../../numeracion.php"; 
               $numeros = new calcula; 
               $boletos = $numeros -> oportunidadesRetorno($i + 1);          

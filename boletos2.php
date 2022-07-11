@@ -38,6 +38,9 @@ include "./components/head.php";
               <div class="col-4">
                 <button id="boton-buscar" class="button button-rounded" onclick="buscarBoleto()">Buscar</button>
               </div>
+              <div class="listaBoletos">
+
+              </div>
             </div>
             <br><br>
             <?php
@@ -60,8 +63,34 @@ include "./components/head.php";
   include "./components/foot.php";
   ?>
   <script>
-    function comprarBoleto(noBoleto) {
-      window.location.href = `compra.php?noBoleto=${noBoleto}`;
+    const listaBoletos = document.querySelector(".listaBoletos");
+    let listaBoletosComprar = [];
+
+    function comprarBoleto(e, noBoleto) {
+      console.log(e.target.classList);
+      
+      // const boleto = document.querySelector("data-id");
+      // console.log(boleto);
+      // this.setAttribute("disabled", "true");
+      // listaBoletosComprar = [...listaBoletosComprar, noBoleto ];
+      // //window.location.href = `compra.php?noBoleto=${noBoleto}`;
+      // const encabezado = document.createElement('h4');
+      // const span = document.createElement('span');
+      // span.classList.add(noBoleto);
+      // span.innerText = noBoleto;
+      // encabezado.appendChild(span);
+      
+      
+      // console.log(listaBoletosComprar);
+      // listaBoletos.appendChild(encabezado);
+      // listaBoletos.addEventListener('click', eliminarBoleto);
+
+    }
+
+    function eliminarBoleto(e){
+      const boletoEliminar = e.target.innerText;
+      console.log(boletoEliminar);
+      //listaBoletos.removeChild(boletoEliminar);
     }
 
     function buscarBoleto(){

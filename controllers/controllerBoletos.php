@@ -6,6 +6,8 @@ class BoletosController {
 
     return $resultado;
   }
+
+  
   public function ctrListarBoletosOcupados() {
     $boletos = BoletosModel::mdlListarBoletosOcupados();    
     $j = 0;
@@ -28,7 +30,7 @@ class BoletosController {
           $j++;
         } else {
           echo '<div class="col-md-2 col-lg-2 col-xl-1 col-3 boleto text-center" style="padding: 10px;">
-            <button class="btn boton-boleto btn-block" onclick="comprarBoleto(' . ($i + 1) . ')">' . ($i + 1) . '</button>
+            <button class="btn boton-boleto btn-block" data-id="'.( $i + 1 ).'" onclick="comprarBoleto(' . ($i + 1) . ')">' . ($i + 1) . '</button>
           </div>';
         }
       } else {

@@ -40,9 +40,7 @@ include "./components/head.php";
                 </div>
             </div>
             <p></p>
-            <div id = "resultado">
-            
-                
+            <div id = "resultado">                
             </div>
           </div>
         </div>
@@ -85,7 +83,7 @@ include "./components/head.php";
           else if(boletoIngresado >= 20001 && boletoIngresado <= 25000){
             noBoleto = 25000 - boletoIngresado + 5001;
           }else if(boletoIngresado >= 30001 && boletoIngresado <= 35000){
-            noBoleto = boletoIngresado - 24998;
+            noBoleto = boletoIngresado - 25000;
           }else if(boletoIngresado >= 45001 && boletoIngresado <= 50000){
             noBoleto = 50000 - boletoIngresado + 5001;
           }
@@ -102,6 +100,7 @@ include "./components/head.php";
         if (boletoIngresado === 0){
             noBoleto = 10001;
         }
+        console.log(noBoleto);
 
         $.ajax({
             url: './controllers/obtenerBoleto.php',
@@ -121,6 +120,7 @@ include "./components/head.php";
                   let tercera = 0;
                   let cuarta = 0;
                   let noBoleto = Number.parseInt(datos.noBoleto);
+                  
                   if (noBoleto <= 5000) {
                     segunda = 20001 - noBoleto;
                     tercera = noBoleto + 35000;
